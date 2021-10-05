@@ -4,28 +4,28 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class cardHand {
-    private LinkedList<Card> discardStack;
+    private LinkedList<Card> playerHand;
 
     public cardHand() {
-        discardStack = new LinkedList<Card>();
+        playerHand = new LinkedList<Card>();
     }
 
     public void push(Card card) {
-        discardStack.push(card);
+        playerHand.push(card);
     }
 
     public Card pop() {
-        return discardStack.pop();
+        return playerHand.pop();
     }
 
     public Card peek() {
-        return discardStack.peek();
+        return playerHand.peek();
     }
 
     public int size() {
         int size = 0;
 
-        ListIterator<Card> iterator = discardStack.listIterator();
+        ListIterator<Card> iterator = playerHand.listIterator();
         while(iterator.hasNext()) {
             size++;
             iterator.next();
@@ -35,7 +35,7 @@ public class cardHand {
 
     public void printStack() {
         System.out.println("Card Stack: ");
-        ListIterator<Card> iterator = discardStack.listIterator();
+        ListIterator<Card> iterator = playerHand.listIterator();
 
         while(iterator.hasNext()) {
             System.out.println(iterator.next());
@@ -46,7 +46,7 @@ public class cardHand {
 
         int size = 0;
 
-        ListIterator<Card> iterator = discardStack.listIterator();
+        ListIterator<Card> iterator = playerHand.listIterator();
         while(iterator.hasNext()) {
             size++;
             iterator.next();

@@ -3,35 +3,35 @@ package Julius;
 import java.util.EmptyStackException;
 
 public class discardStack {
-    private Card[] cardStack;
+    private Card[] discardStack;
     private int top;
 
     public discardStack(int capacity) {
-        cardStack = new Card[capacity];
+        discardStack = new Card[capacity];
     }
 
     public void push(Card card) {
-        if (top == cardStack.length) {
-            Card[] newCardStack = new Card[2 * cardStack.length];
-            System.arraycopy(cardStack, 0, newCardStack, 0, cardStack.length);
-            cardStack = newCardStack;
+        if (top == discardStack.length) {
+            Card[] newCardStack = new Card[2 * discardStack.length];
+            System.arraycopy(discardStack, 0, newCardStack, 0, discardStack.length);
+            discardStack = newCardStack;
         }
 
-        cardStack[top++] = card;
+        discardStack[top++] = card;
     }
 
     public Card pop() {
         if (isEmpty()) throw new EmptyStackException();
 
-        Card poppedCard = cardStack[--top];
-        cardStack[top] = null;
+        Card poppedCard = discardStack[--top];
+        discardStack[top] = null;
         return poppedCard;
     }
 
     public Card peek() {
         if (isEmpty()) throw new EmptyStackException();
 
-        return cardStack[top - 1];
+        return discardStack[top - 1];
     }
 
     public boolean isEmpty() {

@@ -1,5 +1,6 @@
 package Julius;
 
+import java.util.EmptyStackException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,21 +9,23 @@ public class Main {
     public static void main(String[] args) {
         Random random = new Random();
         int startingCapacity = 30;
+
         discardStack discard = new discardStack(startingCapacity);
         cardHand playerHand = new cardHand();
+        PlayerDeck deck = new PlayerDeck(startingCapacity);
 
 
         for (int i = 0; i < startingCapacity; i++) {
-            playerHand.push(new Card("Card " + (i + 1)));
+            deck.push(new Card("Card " + (i + 1)));
         }
 
-        while (!playerHand.isEmpty()) {
+        while (!deck.isEmpty()) {
             int command = random.nextInt(3);
             int cardNumber = random.nextInt(5) + 1;
 
             switch (command) {
                 case 0:
-                    drawCard(playerHand, cardNumber);
+                    drawCard(playerHand, deck, cardNumber);
                     break;
                 case 1:
                     discardCard(discard, cardNumber, playerHand);
@@ -37,16 +40,26 @@ public class Main {
             pauseSystem();
 
             playerHand.printStack();
-            System.out.println("Player has " + playerHand.size() + " cards");
+            System.out.println("The deck has " + deck.size() + " cards");
             System.out.println("Discard Pile has " + discard.size() + " cards");
             pauseSystem();
         }
     }
 
-    private static void drawCard(cardHand player, int cardNumber) {
+    private static void drawCard(cardHand player, PlayerDeck deck, int cardNumber) {
         System.out.println("Drawing " + cardNumber + " cards");
+
+        if (deck.size() == 0) {
+            throw new EmptyStackException();
+        }
+
+        if (deck.size() < cardNumber) {
+            cardNumber = player.size();
+            System.out.println("Insufficient amount. Removing " + cardNumber + " cards from the pile.");
+        }
+
         for (int i = 0; i < cardNumber; i++) {
-            player.push(new Card("Card" + i));
+            player.push(deck.pop());
         }
     }
 
