@@ -24,6 +24,7 @@ public class Main {
         hashtable.remove("AmaNEk");
 
         System.out.println("\nNew Hashtable: ");
+
         hashtable.printHashtable();
     }
 }

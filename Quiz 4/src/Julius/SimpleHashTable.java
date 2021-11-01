@@ -87,8 +87,8 @@ public class SimpleHashTable {
 
         while (rehashedKey != maxSize || isOccupied(rehashedKey)) {
 
-            if (isOccupied(rehashedKey) && hashKey(hashtable[rehashedKey].key) != rehashedKey && !isOccupied(rehashedKey - 1)) {
-                hashtable[rehashedKey - 1] = hashtable[rehashedKey];
+            if (isOccupied(rehashedKey) && hashKey(hashtable[rehashedKey].key) != rehashedKey && !isOccupied(hashKey(hashtable[rehashedKey].key))) {
+                hashtable[hashKey(hashtable[rehashedKey].key)] = hashtable[rehashedKey];
                 hashtable[rehashedKey] = null;
                 rehashedKey--;
             }
